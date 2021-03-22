@@ -146,7 +146,7 @@ public class RichConnection implements Closeable {
 		if (dbType == DbType.MYSQL) {
 			query = "SHOW TABLES IN " + database;
 		} else if (dbType == DbType.MSSQL || dbType == DbType.PDW || dbType == DbType.AZURE) {
-			query = "SELECT CONCAT(schemas.name, '.', tables_views.name) FROM " +
+			query = "SELECT schemas.name + '.' + tables_views.name FROM " +
 					"(SELECT schema_id, name FROM %1$s.sys.tables UNION ALL SELECT schema_id, name FROM %1$s.sys.views) tables_views " +
 					"INNER JOIN %1$s.sys.schemas ON tables_views.schema_id = schemas.schema_id " +
 					"ORDER BY schemas.name, tables_views.name";
